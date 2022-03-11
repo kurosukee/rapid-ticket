@@ -20,6 +20,13 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * The controller namespace for the business admin application.
+     *
+     * @var string|null
+     */
+    protected $namespaceBusinessAdmin = 'App\BusinessAdmin\Controllers';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -32,6 +39,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('api')
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
+
+            Route::prefix('business-admin')
+                ->middleware('business-admin')
+                ->namespace($this->namespaceBusinessAdmin)
+                ->group(base_path('routes/business-admin.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
